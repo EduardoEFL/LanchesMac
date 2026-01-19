@@ -60,9 +60,6 @@ namespace LanchesMac.Models
 
             _context.SaveChanges();
         }
-
-
-
         public int RemoveDoCarrinho(Lanche lanche)
         {
             CarrinhoCompraItem carrinhoCompraItem = ObterCarrinhoCompraItem(lanche);
@@ -84,9 +81,16 @@ namespace LanchesMac.Models
             }
            
             return quantidadeLocal;
+        }
 
+        public void LimparCarrinho(CarrinhoCompra CarrinhoCompra)
+        {
+            var carrinhoItens = _context.CarrinhoCompraItens
+                .Where(c => c.CarrinhoCompraId == CarrinhoCompra.CarrinhoCompraId);
 
+            _context.CarrinhoCompraItens.RemoveRange(carrinhoItens);
 
+            _context.SaveChanges();
         }
 
 
