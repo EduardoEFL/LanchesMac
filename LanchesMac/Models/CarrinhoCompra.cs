@@ -81,6 +81,7 @@ namespace LanchesMac.Models
             }
            
             return quantidadeLocal;
+        }
 
         }
 
@@ -101,6 +102,7 @@ namespace LanchesMac.Models
 
              _context.CarrinhoCompraItens.RemoveRange(carrinhoItens);
              _context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public decimal GetCarrinhoCompraTotal() 
