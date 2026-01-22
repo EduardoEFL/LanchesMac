@@ -1,12 +1,10 @@
 ﻿using LanchesMac.context;
-using LanchesMac.Migrations;
 using Microsoft.EntityFrameworkCore;
 
 namespace LanchesMac.Models
 {
     public class CarrinhoCompra
     {
-
 
         private readonly AppDbContext _context;
 
@@ -60,7 +58,6 @@ namespace LanchesMac.Models
 
             _context.SaveChanges();
         }
-
         public int RemoveDoCarrinho(Lanche lanche)
         {
             CarrinhoCompraItem carrinhoCompraItem = ObterCarrinhoCompraItem(lanche);
@@ -79,10 +76,8 @@ namespace LanchesMac.Models
                     _context.CarrinhoCompraItens.Remove(carrinhoCompraItem);
                 }
             }
-           
-            return quantidadeLocal;
-        }
 
+            return quantidadeLocal;
         }
 
         public List<CarrinhoCompraItem> GetCarrinhoCompraItens()
@@ -94,22 +89,21 @@ namespace LanchesMac.Models
                    .Include(s => s.Lanche)
                    .ToList());
         }
-        
+
         public void LimparCarrinho()
         {
             var carrinhoItens = _context.CarrinhoCompraItens
                    .Where(carrinho => carrinho.CarrinhoCompraId == CarrinhoCompraId);
 
-             _context.CarrinhoCompraItens.RemoveRange(carrinhoItens);
-             _context.SaveChanges();
+            _context.CarrinhoCompraItens.RemoveRange(carrinhoItens);
             _context.SaveChanges();
         }
 
-        public decimal GetCarrinhoCompraTotal() 
+        public decimal GetCarrinhoCompraTotal()
         {
-           var total = _context.CarrinhoCompraItens
-                .Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
-                .Select(c => c.Lanche.Preco * c.Quantidade).Sum();
+            var total = _context.CarrinhoCompraItens
+                 .Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
+                 .Select(c => c.Lanche.Preco * c.Quantidade).Sum();
             return total;
         }
 
