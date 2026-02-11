@@ -5,6 +5,7 @@ using LanchesMac.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.VisualStudio.Web.CodeGeneration.DotNet;
 using System;
 
 namespace LanchesMac;
@@ -54,6 +55,13 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
+          
+            endpoints.MapControllerRoute(
+                name: "categoriaFiltro",
+                pattern: "Lanche/{ Action}/{categoria?}",
+                defaults: new {controller = "Lanche", Action = "List" });
+
+
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
