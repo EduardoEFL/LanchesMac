@@ -103,9 +103,8 @@ namespace LanchesMac.Models
 
         public decimal GetCarrinhoCompraTotal()
         {
-            var total = _context.CarrinhoCompraItens
-                 .Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
-                 .Select(c => c.Lanche.Preco * c.Quantidade).Sum();
+            var itens = GetCarrinhoCompraItens();
+            var total = itens.Sum(c => c.Lanche.Preco * c.Quantidade);
             return total;
         }
 
