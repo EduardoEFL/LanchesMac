@@ -13,7 +13,7 @@ public class Program
         {
             var services = scope.ServiceProvider;
             var context = services.GetRequiredService<AppDbContext>();
-            context.Database.Migrate();
+            //context.Database.Migrate();
         }
 
         host.Run();
