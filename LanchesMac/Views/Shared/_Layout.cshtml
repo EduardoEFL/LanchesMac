@@ -18,11 +18,22 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    @await Component.InvokeAsync("CarrinhoCompraResumo")
-                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    <a class="nav-link text-light" asp-area="" asp-controller="Lanche" asp-action="Index">Lanches</a>
-                    <a class="nav-link text-light" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>
+                    
 
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Lanche" asp-action="List">Lanches</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text">
+                        @await Component.InvokeAsync("CarrinhoCompraResumo")
+                    </span>
                 </div>
             </div>
         </nav>

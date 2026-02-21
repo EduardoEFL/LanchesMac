@@ -1,10 +1,22 @@
-﻿@Model Lanche
+﻿@model Lanche
 
-<div class="col-sm-4 col-md-4 col-lg-4">
+@* <div class="col-sm-4 col-md-4 col-lg-4">
 
     <p><img src="@Model.ImagemUrl" class="img-fluid"></p>
-    <h3>Preço :@Model.Preco.ToString("c")</h3>
     <h4>@Model.Nome</h4>
     <p>@Model.DescricaoCurta</p>
+    <h3>@Model.Preco.ToString("c")</h3>
 
+</div> *@
+
+<div class="col-sm-4 col-lg-3 mb-3 mb-sm-0">
+    <div class="card text-center" @* style="width: 18rem;" *@>
+        <img src="@Model.ImagemUrl" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h3 class="card-title">@Model.Nome - @Model.Categoria.CategoriaNome</h3>
+            <p class="card-text">@Model.DescricaoCurta.</p>
+            <h4>@Model.Preco.ToString("c")</h4>
+            <a asp-action="AdicionarItemNoCarrinhoCompra" asp-controller="CarrinhoCompra" asp-route-lancheId="@Model.LancheId" class="btn btn-primary">Pedir</a>
+        </div>
+    </div>
 </div>
