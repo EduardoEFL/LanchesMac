@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,7 +18,11 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    
+                    @await Component.InvokeAsync("CarrinhoCompraResumo")
+                    @await Component.InvokeAsync("CategoriaMenu")
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    @* <a class="nav-link text-light" asp-area="" asp-controller="Lanche" asp-action="List">Lanches</a> *@
+                    <a class="nav-link text-light" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>
 
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
