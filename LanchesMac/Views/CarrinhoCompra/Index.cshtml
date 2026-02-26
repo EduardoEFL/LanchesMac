@@ -1,20 +1,20 @@
 ﻿@model CarrinhoCompraViewModel
 
-<div class="container">
-    <div class="row">
-        <img src="~/images/Full-Cart-icon.png" alt="#" />
+<div class="Container">
+    <div class="row checkoutForm">
 
         <div>
-            <h4>Seu carrinho de compras</h4>
+            <img src="~/images/Full-Cart-icon.png" width="30" height="35" /> <h4>Seu carrinho de compras : </h4>
         </div>
 
         <table class="table table-bordered table-striped">
+
             <thead>
                 <tr>
                     <th>Quantidade</th>
                     <th>Lanche</th>
                     <th class="text-right">Preço</th>
-                    <th class="text-right">subtotal</th>
+                    <th class="text-right">Subtotal</th>
                     <th></th>
                 </tr>
             </thead>
@@ -33,8 +33,8 @@
 
                         <td class="text-center">
                             <a asp-controller="CarrinhoCompra" asp-action="RemoverItemDoCarrinhoCompra"
-                               asp-route-lancheid="@item.Lanche.LancheId">
-                                <img src="~/images/delete.png" alt="#" />
+                               asp-route-lancheId="@item.Lanche.LancheId">
+                                <img src="~/images/delete.png" width="20px" height="20px" />
                             </a>
                         </td>
                     </tr>
@@ -50,11 +50,14 @@
             </tfoot>
         </table>
 
-        <div class="text-right"
-    <div class="btn-group">
-        <a class="btn btn-success" asp-controller="pedido" asp-action="checkout">Encerrar Pedido</a>
-        <a class="btn btn-primary" asp-controller="Lanche" asp-action="List">Continuar Comprando</a>
+
+        <div class="text-right">
+            <div class="btn-group">
+                <a class="btn btn-success" asp-controller="Pedido" asp-action="Checkout">Encerrar Pedido</a>
+                &nbsp;&nbsp;&nbsp;
+                <a class="btn btn-primary" asp-controller="Lanche" asp-action="List">Continuar Comprando</a>
+            </div>
+        </div>
+        <br />
     </div>
-    <br/>
 </div>
-    </div>
