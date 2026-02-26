@@ -3,42 +3,44 @@ using System;
 using LanchesMac.context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace LanchesMac.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260226003011_PedidoDetalhes")]
+    partial class PedidoDetalhes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.36")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("LanchesMac.Models.CarrinhoCompraItem", b =>
                 {
                     b.Property<int>("CarrinhoCompraItemId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CarrinhoCompraItemId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarrinhoCompraItemId"), 1L, 1);
 
                     b.Property<string>("CarrinhoCompraId")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int?>("LancheId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantidade")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("CarrinhoCompraItemId");
 
@@ -51,141 +53,73 @@ namespace LanchesMac.Migrations
                 {
                     b.Property<int>("CategoriaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CategoriaId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoriaId"), 1L, 1);
 
                     b.Property<string>("CategoriaNome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("CategoriaId");
 
                     b.ToTable("Categorias");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoriaId = 1,
-                            CategoriaNome = "Normal",
-                            Descricao = "Lanche feito com ingredientes normais"
-                        },
-                        new
-                        {
-                            CategoriaId = 2,
-                            CategoriaNome = "Natural",
-                            Descricao = "Lanche feito com ingredientes integrais e naturais"
-                        });
                 });
 
             modelBuilder.Entity("LanchesMac.Models.Lanche", b =>
                 {
                     b.Property<int>("LancheId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("LancheId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LancheId"), 1L, 1);
 
                     b.Property<int>("CategoriaId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("DescricaoCurta")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("DescricaoDetalhada")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("EmEstoque")
-                        .HasColumnType("boolean");
+                        .HasColumnType("bit");
 
                     b.Property<string>("ImagemThumbnailUrl")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ImagemUrl")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("IsLanchePreferido")
-                        .HasColumnType("boolean");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(80)
-                        .HasColumnType("character varying(80)");
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<decimal>("Preco")
-                        .HasColumnType("numeric(10,2)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("LancheId");
 
                     b.HasIndex("CategoriaId");
 
                     b.ToTable("Lanches");
-
-                    b.HasData(
-                        new
-                        {
-                            LancheId = 1,
-                            CategoriaId = 1,
-                            DescricaoCurta = "Pão, hambúrger, ovo, presunto, queijo e batata palha",
-                            DescricaoDetalhada = "Delicioso pão de hambúrger com ovo frito; presunto e queijo de primeira qualidade acompanhado com batata palha",
-                            EmEstoque = true,
-                            ImagemThumbnailUrl = "http://www.macoratti.net/Imagens/lanches/cheesesalada1.jpg",
-                            ImagemUrl = "http://www.macoratti.net/Imagens/lanches/cheesesalada1.jpg",
-                            IsLanchePreferido = false,
-                            Nome = "Cheese Salada",
-                            Preco = 12.50m
-                        },
-                        new
-                        {
-                            LancheId = 2,
-                            CategoriaId = 1,
-                            DescricaoCurta = "Pão, presunto, mussarela e tomate",
-                            DescricaoDetalhada = "Delicioso pão francês quentinho na chapa com presunto e mussarela bem servidos com tomate preparado com carinho.",
-                            EmEstoque = true,
-                            ImagemThumbnailUrl = "http://www.macoratti.net/Imagens/lanches/mistoquente4.jpg",
-                            ImagemUrl = "http://www.macoratti.net/Imagens/lanches/mistoquente4.jpg",
-                            IsLanchePreferido = false,
-                            Nome = "Misto Quente",
-                            Preco = 8.00m
-                        },
-                        new
-                        {
-                            LancheId = 3,
-                            CategoriaId = 1,
-                            DescricaoCurta = "Pão, hambúrger, presunto, mussarela e batalha palha",
-                            DescricaoDetalhada = "Pão de hambúrger especial com hambúrger de nossa preparação e presunto e mussarela; acompanha batata palha.",
-                            EmEstoque = true,
-                            ImagemThumbnailUrl = "http://www.macoratti.net/Imagens/lanches/cheeseburger1.jpg",
-                            ImagemUrl = "http://www.macoratti.net/Imagens/lanches/cheeseburger1.jpg",
-                            IsLanchePreferido = false,
-                            Nome = "Cheese Burger",
-                            Preco = 11.00m
-                        },
-                        new
-                        {
-                            LancheId = 4,
-                            CategoriaId = 2,
-                            DescricaoCurta = "Pão Integral, queijo branco, peito de peru, cenoura, alface, iogurte",
-                            DescricaoDetalhada = "Pão integral natural com queijo branco, peito de peru e cenoura ralada com alface picado e iorgurte natural.",
-                            EmEstoque = true,
-                            ImagemThumbnailUrl = "http://www.macoratti.net/Imagens/lanches/lanchenatural.jpg",
-                            ImagemUrl = "http://www.macoratti.net/Imagens/lanches/lanchenatural.jpg",
-                            IsLanchePreferido = true,
-                            Nome = "Lanche Natural Peito Peru",
-                            Preco = 15.00m
-                        });
                 });
 
             modelBuilder.Entity("LanchesMac.Models.Pedido", b =>
