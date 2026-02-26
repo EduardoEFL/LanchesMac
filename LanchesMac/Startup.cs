@@ -21,7 +21,14 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+        Console.WriteLine(Configuration.GetConnectionString("DefaultConnection"));
+        services.AddDbContext<AppDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
+            npgsqlOptions => {
+                npgsqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 5,
+                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                    errorCodesToAdd: null);
+            }));
         services.AddTransient<IlancheRepository, LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
         services.AddTransient<IPedidoRepository,PedidoRepository>();
@@ -56,13 +63,6 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-          
-            endpoints.MapControllerRoute(
-                name: "categoriaFiltro",
-                pattern: "Lanche/{ Action}/{categoria?}",
-                defaults: new {controller = "Lanche", Action = "List" });
-
-
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
