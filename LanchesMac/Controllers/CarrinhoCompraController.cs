@@ -2,6 +2,7 @@
 using LanchesMac.Repositories.Interfaces;
 using LanchesMac.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LanchesMac.Controllers
 {

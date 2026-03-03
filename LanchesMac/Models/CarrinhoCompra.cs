@@ -75,6 +75,7 @@ namespace LanchesMac.Models
                 {
                     _context.CarrinhoCompraItens.Remove(carrinhoCompraItem);
                 }
+                _context.SaveChanges();
             }
 
             return quantidadeLocal;
