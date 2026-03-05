@@ -1,4 +1,4 @@
-﻿using LanchesMac.context;
+﻿using LanchesMac.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace LanchesMac.Models

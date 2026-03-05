@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
 
 namespace LanchesMac.Context
 {
@@ -11,9 +9,7 @@ namespace LanchesMac.Context
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
         }
-
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Lanche> Lanches { get; set; }
         public DbSet<CarrinhoCompraItem> CarrinhoCompraItens { get; set; }
@@ -22,3 +18,4 @@ namespace LanchesMac.Context
         public DbSet<PedidoDetalhe> PedidoDetalhes { get; set; }
     }
 }
+
