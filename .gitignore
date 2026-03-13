@@ -360,4 +360,8 @@ MigrationBackup/
 .ionide/
 
 # Fody - auto-generated XML schema
+*.xsd
+
+# Docker (local env)
+/docker/.env
 FodyWeavers.xsd
